@@ -1,0 +1,30 @@
+---
+title: DataCite Sitemaps
+description: Sitemaps for DataCite Search
+---
+<div class="wrapper">
+  <!-- https://www.pexels.com/photo/night-view-24975/ -->
+  <div class="landing-header" style="background-image: url('//<%= ENV['CDN_HOST'] %>/images/sitemaps/landing.jpg');">
+    <div class="container">
+      <div class="motto">
+        <h1><%= current_page.data.title %></h1>
+        <p><%= current_page.data.description %></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section-white">
+    <div class="container-fluid">
+      <div class="row row-section">
+        <div class="col-md-8 col-md-offset-2 info">
+          <div class="icon icon-orcid">
+            <i class='fa fa-sitemap fa-fw'></i>
+          </div>
+          <div class="description">
+            <p>This service provides sitemaps for indexing of DataCite Search by Google, Bing and other search engines.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
