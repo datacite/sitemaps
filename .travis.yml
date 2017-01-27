@@ -4,18 +4,30 @@ rvm:
 cache: bundler
 
 before_install:
+  - set -e
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+      AWS_BUCKET="sitemaps.datacite.org";
+      RACK_ENV="production";
+      cp .env.master .env;
+    elif [ "$TRAVIS_BRANCH" == "test" ]; then
+      AWS_BUCKET="sitemaps.test.datacite.org";
+      RACK_ENV="stage";
+      cp .env.stage .env;
+    else
+      exit 1;
+    fi
   - wget https://github.com/jgm/pandoc/releases/download/1.15.2/pandoc-1.15.2-1-amd64.deb
   - sudo dpkg -i pandoc-1.15.2-1-amd64.deb
   - rm pandoc-1.15.2-1-amd64.deb
 
 script:
-  - bundle exec middleman build -e production
+  - bundle exec middleman build -e $RACK_ENV
 
 deploy:
   provider: s3
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_KEY
-  bucket: sitemaps.datacite.org
+  bucket: $AWS_BUCKET
   region: eu-west-1
   skip_cleanup: true
   local_dir: build
