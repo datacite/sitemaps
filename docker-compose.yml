@@ -7,8 +7,8 @@ services:
   assets:
     env_file:
       - .env
-    image: datacite/sitemap
+    image: datacite/sitemaps
     ports:
-      - "8010:4567"
+      - "9080:4567"
     volumes:
       - .:/home/app/webapp
